@@ -45,11 +45,11 @@ const rightDomains = domains.slice(currentIndex + 1);
 		<div class="exhibition">
 			<header>
 				<h1>Ioannis's Domain Collection</h1>
-				<p class="description">Welcome to my curated collection of digital domains. Each domain represents a unique digital space, carefully selected and maintained. Click any domain to visit its respective space.</p>
+				<p class="description">Welcome to my curated collection of digital domains. Click on the left or right domains to cycle through my whole collection.</p>
 				<p class="lease-notice">
 					Interested in using one of these domains? While I maintain sentimental attachment to these domains, 
-					I'm open to leasing them at no cost. The only requirement is maintaining a backlink to this showcase. 
-					<a href="mailto:your@email.com" class="contact-link">Reach out to discuss</a>.
+					I'm open to leasing them. 
+					<a href="mailto:yiannisgr1@gmail.com" class="contact-link">Reach out to discuss</a>.
 				</p>
 			</header>
 
@@ -125,7 +125,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				flex-direction: column;
 				align-items: center;
 				gap: 40px; /* Reduced from 60px */
-				padding: 60px 120px; /* Reduced from 80px */
+				padding: clamp(40px, 5vw, 60px) clamp(20px, 8vw, 120px); /* Reduced from 80px */
 				width: 100%;
 				max-width: 1200px;
 				position: relative;
@@ -139,7 +139,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				text-align: center;
 				max-width: 800px;
 				position: relative;
-				padding: 30px;
+				padding: clamp(20px, 4vw, 30px);
 				border: none;
 			}
 
@@ -150,30 +150,32 @@ const rightDomains = domains.slice(currentIndex + 1);
 
 			/* Update heading style */
 			h1 {
-				font-size: 2.5rem;
+				font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
 				margin: 0;
 				color: #fff;
 				font-variant: small-caps;
-				letter-spacing: 4px;
+				letter-spacing: clamp(2px, 0.5vw, 4px);
 				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+				line-height: 1.2;
 			}
 
 			.description {
 				color: #fff;
-				line-height: 1.8;
-				margin: 20px 0; /* Reduced from 30px */
-				font-size: 1.1rem;
+				line-height: 1.6;
+				margin: 20px auto;
+				font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+				max-width: min(90%, 600px);
 				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 			}
 
 			/* Update lease notice */
 			.lease-notice {
 				color: #fff;
-				font-size: 1rem;
-				line-height: 1.8;
-				margin: 20px 0;
-				padding: 20px;
-				border: none;
+				font-size: clamp(0.85rem, 2vw, 1rem);
+				line-height: 1.6;
+				margin: 20px auto;
+				padding: clamp(15px, 3vw, 20px);
+				max-width: min(90%, 700px);
 			}
 
 			/* Remove lease notice decorative elements */
@@ -188,6 +190,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				font-weight: 500;
 				padding: 0 4px;
 				font-variant: small-caps;
+				font-size: inherit;
 			}
 
 			.contact-link:hover {
@@ -218,7 +221,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				right: 0;
 				bottom: 0;
 				pointer-events: none;
-				z-index: 2;
+				z-index: 1;
 			}
 
 			/* Restore original column capital */
@@ -335,7 +338,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				right: 0;
 				height: 40px;
 				pointer-events: none;
-				z-index: 10;
+				z-index: 11;
 				background: repeating-linear-gradient(90deg,
 					#fff 0%,
 					#fff 0.5vw,
@@ -358,7 +361,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				bottom: 40px;
 				left: 50%;
 				transform: translateX(-50%);
-				z-index: 11;
+				z-index: 12;
 				display: flex;
 				align-items: flex-end; /* Align bottoms of pedestals */
 				gap: 40px;
@@ -481,112 +484,91 @@ const rightDomains = domains.slice(currentIndex + 1);
 				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 			}
 
-			/* Add responsive styles */
+			/* Update responsive styles for pedestals */
 			@media (max-width: 768px) {
-				.exhibition {
-					padding: 60px 20px; /* Reduce side padding */
-					gap: 30px;
+				.domain-display {
+					gap: clamp(20px, 4vw, 40px);
 				}
 
-				h1 {
-					font-size: 2rem; /* Smaller title */
-				}
-
-				.description {
-					font-size: 1rem;
-				}
-
-				/* Adjust columns for mobile */
-				.column {
-					width: 30px; /* Thinner columns */
-				}
-
-				.column.left {
-					left: 10px; /* Closer to edge */
-				}
-
-				.column.right {
-					right: 10px;
-				}
-
-				/* Adjust pedestal for mobile */
+				/* Adjust main pedestal */
 				.marble-pedestal {
-					width: 180px; /* Narrower pedestal */
-					height: 140px; /* Slightly shorter */
+					width: 160px; /* Narrower */
+					height: 140px;
+					bottom: 45px;
 				}
 
-				.pedestal-body {
-					margin: 0 20px; /* Less margin */
-					height: 80px;
+				/* Adjust side pedestals */
+				.side-pedestal {
+					width: 100px; /* Much narrower */
+					height: 90px; /* Much shorter */
+					bottom: 40px;
 				}
 
-				.pedestal-base::after {
-					left: -20px;
-					right: -20px;
+				.side-pedestal .pedestal-top {
+					height: 15px;
 				}
 
-				/* Adjust domain text */
-				.domain-text {
-					padding: 12px 20px;
-					font-size: 0.9rem;
-					max-width: 90vw; /* Prevent overflow on small screens */
-					overflow: hidden;
-					text-overflow: ellipsis; /* Show ellipsis if text is too long */
+				.side-pedestal .pedestal-body {
+					height: 60px;
+					margin: 0 15px;
 				}
 
-				/* Adjust header padding */
+				.side-pedestal .pedestal-base {
+					height: 15px;
+				}
+
 				header {
-					padding: 20px;
-				}
-
-				.lease-notice {
-					padding: 15px;
-					font-size: 0.9rem;
-				}
-
-				/* Adjust museum height */
-				.museum {
-					min-height: 200px;
-				}
-
-				/* Update mobile fluting pattern */
-				.column-shaft::before,
-				.border-fluting-top,
-				.border-fluting-bottom {
-					background: repeating-linear-gradient(90deg,
-						#fff 0%,
-						#fff 0.8vw,
-						#f5f5f5 0.8vw,
-						#f5f5f5 1.6vw
-					);
+					padding: clamp(20px, 4vw, 30px);
 				}
 			}
 
 			/* Additional adjustments for very small screens */
 			@media (max-width: 480px) {
-				h1 {
-					font-size: 1.8rem;
+				.domain-display {
+					gap: 10px; /* Even smaller gap */
 				}
 
 				.marble-pedestal {
-					width: 160px;
-					height: 120px;
+					width: 120px;
+					height: 100px;
+					bottom: 42px;
 				}
 
-				.column {
-					width: 20px;
+				.side-pedestal {
+					width: 80px;
+					height: 70px;
+					bottom: 38px;
 				}
 
-				.column.left {
-					left: 5px;
+				.side-pedestal .pedestal-top {
+					height: 12px;
 				}
 
-				.column.right {
-					right: 5px;
+				.side-pedestal .pedestal-body {
+					height: 46px;
+					margin: 0 12px;
+				}
+
+				.side-pedestal .pedestal-base {
+					height: 12px;
+				}
+
+				/* Adjust fluting pattern for smaller pedestals */
+				.pedestal-body {
+					background: repeating-linear-gradient(90deg,
+						#fff 0px,
+						#fff 3px,
+						#f5f5f5 3px,
+						#f5f5f5 6px
+					);
 				}
 
 				.exhibition {
-					padding: 60px 15px;
+					padding: clamp(30px, 4vw, 40px) clamp(15px, 3vw, 20px);
+				}
+
+				.lease-notice {
+					padding: clamp(12px, 2.5vw, 15px);
 				}
 			}
 		</style>
