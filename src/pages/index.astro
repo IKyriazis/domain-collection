@@ -71,6 +71,8 @@ const rightDomains = domains.slice(currentIndex + 1);
 				color: #fff;
 				position: relative;
 				overflow-x: hidden;
+				height: 100vh;
+				overflow: hidden;
 			}
 
 			/* Remove body overlays */
@@ -117,87 +119,66 @@ const rightDomains = domains.slice(currentIndex + 1);
 				border-top: 1px solid #f0f0f0;
 			}
 
+			/* Update exhibition container */
 			.exhibition {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: 60px;
-				padding: 80px 120px;
+				gap: 40px; /* Reduced from 60px */
+				padding: 60px 120px; /* Reduced from 80px */
 				width: 100%;
 				max-width: 1200px;
 				position: relative;
 				z-index: 1;
+				max-height: calc(100vh - 80px); /* Account for top and bottom borders */
+				overflow-y: auto;
 			}
 
+			/* Make header more compact */
 			header {
 				text-align: center;
 				max-width: 800px;
 				position: relative;
-				padding: 40px;
-				border: 1px solid rgba(255, 215, 0, 0.2);
-				background: rgba(255, 255, 255, 0.03);
+				padding: 30px;
+				border: none;
 			}
 
-			/* Greek column decorations */
+			/* Remove background from header */
 			header::before, header::after {
-				content: '';
-				position: absolute;
-				top: 0;
-				width: 30px;
-				height: 100%;
-				background: linear-gradient(to bottom,
-					#ffd700 0%, #ffd700 10%,
-					transparent 10%, transparent 90%,
-					#ffd700 90%, #ffd700 100%
-				);
-				opacity: 0.2;
+				display: none;
 			}
 
-			header::before {
-				left: 0;
-			}
-
-			header::after {
-				right: 0;
-			}
-
+			/* Update heading style */
 			h1 {
-				font-size: 3rem;
+				font-size: 2.5rem;
 				margin: 0;
-				background: linear-gradient(45deg, #ffd700, #fff7cc); /* Gold gradient */
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+				color: #fff;
 				font-variant: small-caps;
 				letter-spacing: 4px;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 			}
 
 			.description {
 				color: #fff;
 				line-height: 1.8;
-				margin: 30px 0;
+				margin: 20px 0; /* Reduced from 30px */
 				font-size: 1.1rem;
 				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 			}
 
+			/* Update lease notice */
 			.lease-notice {
 				color: #fff;
 				font-size: 1rem;
 				line-height: 1.8;
 				margin: 20px 0;
-				padding: 30px;
-				border: 2px solid rgba(255, 215, 0, 0.2);
-				background: rgba(30, 61, 89, 0.6);
-				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-				position: relative;
+				padding: 20px;
+				border: none;
 			}
 
+			/* Remove lease notice decorative elements */
 			.lease-notice::before {
-				content: '';
-				position: absolute;
-				inset: 5px;
-				border: 1px solid rgba(255, 215, 0, 0.1);
-				pointer-events: none;
+				display: none;
 			}
 
 			.contact-link {
@@ -214,12 +195,13 @@ const rightDomains = domains.slice(currentIndex + 1);
 				text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 			}
 
+			/* Adjust museum height */
 			.museum {
 				width: 100%;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				min-height: 400px;
+				min-height: 300px; /* Reduced from 400px */
 				position: relative;
 			}
 
@@ -334,10 +316,10 @@ const rightDomains = domains.slice(currentIndex + 1);
 				right: 0;
 				bottom: 0;
 				background: repeating-linear-gradient(90deg,
-					#fff 0px,
-					#fff 5px,
-					#f5f5f5 5px,
-					#f5f5f5 10px
+					#fff 0%,
+					#fff 0.5vw,
+					#f5f5f5 0.5vw,
+					#f5f5f5 1vw
 				);
 			}
 
@@ -355,10 +337,10 @@ const rightDomains = domains.slice(currentIndex + 1);
 				pointer-events: none;
 				z-index: 10;
 				background: repeating-linear-gradient(90deg,
-					#fff 0px,
-					#fff 5px,
-					#f5f5f5 5px,
-					#f5f5f5 10px
+					#fff 0%,
+					#fff 0.5vw,
+					#f5f5f5 0.5vw,
+					#f5f5f5 1vw
 				);
 			}
 
@@ -373,31 +355,78 @@ const rightDomains = domains.slice(currentIndex + 1);
 			/* Add styles for the domain pedestal */
 			.domain-display {
 				position: fixed;
-				bottom: 40px; /* Align with bottom border */
+				bottom: 40px;
 				left: 50%;
 				transform: translateX(-50%);
+				z-index: 11;
 				display: flex;
-				flex-direction: column;
-				align-items: center;
-				z-index: 11; /* Above the border */
+				align-items: flex-end; /* Align bottoms of pedestals */
+				gap: 40px;
 			}
 
+			/* Style for side pedestals */
+			.side-pedestal {
+				width: 160px; /* Smaller width */
+				height: 120px; /* Smaller height */
+				position: relative;
+				transform: translateY(40px);
+				opacity: 0.7; /* Slightly faded */
+				bottom: 50px;
+			}
+
+			.side-pedestal .pedestal-top {
+				height: 20px; /* Smaller top */
+			}
+
+			.side-pedestal .pedestal-top::before {
+				top: -10px;
+				left: -10px;
+				right: -10px;
+				height: 10px;
+			}
+
+			.side-pedestal .pedestal-body {
+				height: 80px; /* Smaller body */
+				margin: 0 20px;
+			}
+
+			.side-pedestal .pedestal-base {
+				height: 20px; /* Smaller base */
+			}
+
+			.side-pedestal .pedestal-base::after {
+				bottom: -10px;
+				left: -20px;
+				right: -20px;
+				height: 10px;
+			}
+
+			/* Update domain text */
 			.domain-text {
-				background: linear-gradient(135deg, #1e3d59, #2d5175);
-				padding: 15px 30px;
-				border: 1px solid rgba(255, 255, 255, 0.2);
 				color: #fff;
+				padding: 15px 30px;
+				border: none;
 				font-variant: small-caps;
 				letter-spacing: 1px;
 				text-decoration: none;
 				margin-bottom: 20px;
+				white-space: nowrap;
+				display: inline-block;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+			}
+
+			/* Add subtle hover effect for domain text */
+			.domain-text:hover {
+				text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 			}
 
 			.marble-pedestal {
 				width: 240px;
 				height: 160px;
+				bottom: 55px;
 				position: relative;
 				transform: translateY(40px);
+				border: none;
 			}
 
 			.pedestal-top {
@@ -405,6 +434,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				background: #fff;
 				position: relative;
 				box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+				border: none;
 			}
 
 			.pedestal-top::before {
@@ -429,6 +459,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 					#f5f5f5 5px,
 					#f5f5f5 10px
 				);
+				border: none;
 			}
 
 			.pedestal-base {
@@ -436,6 +467,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				background: #fff;
 				position: relative;
 				box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.1);
+				border: none;
 			}
 
 			.pedestal-base::after {
@@ -448,18 +480,136 @@ const rightDomains = domains.slice(currentIndex + 1);
 				background: #fff;
 				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 			}
+
+			/* Add responsive styles */
+			@media (max-width: 768px) {
+				.exhibition {
+					padding: 60px 20px; /* Reduce side padding */
+					gap: 30px;
+				}
+
+				h1 {
+					font-size: 2rem; /* Smaller title */
+				}
+
+				.description {
+					font-size: 1rem;
+				}
+
+				/* Adjust columns for mobile */
+				.column {
+					width: 30px; /* Thinner columns */
+				}
+
+				.column.left {
+					left: 10px; /* Closer to edge */
+				}
+
+				.column.right {
+					right: 10px;
+				}
+
+				/* Adjust pedestal for mobile */
+				.marble-pedestal {
+					width: 180px; /* Narrower pedestal */
+					height: 140px; /* Slightly shorter */
+				}
+
+				.pedestal-body {
+					margin: 0 20px; /* Less margin */
+					height: 80px;
+				}
+
+				.pedestal-base::after {
+					left: -20px;
+					right: -20px;
+				}
+
+				/* Adjust domain text */
+				.domain-text {
+					padding: 12px 20px;
+					font-size: 0.9rem;
+					max-width: 90vw; /* Prevent overflow on small screens */
+					overflow: hidden;
+					text-overflow: ellipsis; /* Show ellipsis if text is too long */
+				}
+
+				/* Adjust header padding */
+				header {
+					padding: 20px;
+				}
+
+				.lease-notice {
+					padding: 15px;
+					font-size: 0.9rem;
+				}
+
+				/* Adjust museum height */
+				.museum {
+					min-height: 200px;
+				}
+
+				/* Update mobile fluting pattern */
+				.column-shaft::before,
+				.border-fluting-top,
+				.border-fluting-bottom {
+					background: repeating-linear-gradient(90deg,
+						#fff 0%,
+						#fff 0.8vw,
+						#f5f5f5 0.8vw,
+						#f5f5f5 1.6vw
+					);
+				}
+			}
+
+			/* Additional adjustments for very small screens */
+			@media (max-width: 480px) {
+				h1 {
+					font-size: 1.8rem;
+				}
+
+				.marble-pedestal {
+					width: 160px;
+					height: 120px;
+				}
+
+				.column {
+					width: 20px;
+				}
+
+				.column.left {
+					left: 5px;
+				}
+
+				.column.right {
+					right: 5px;
+				}
+
+				.exhibition {
+					padding: 60px 15px;
+				}
+			}
 		</style>
 
 		<!-- Add fluting elements after the columns-container -->
 		<div class="border-fluting-top"></div>
 		<div class="border-fluting-bottom"></div>
 
-		<!-- Add the domain display after the museum div -->
+		<!-- Update the domain display HTML -->
 		<div class="domain-display">
-			<a href={`http://${domains[currentIndex]}`} class="domain-text">
-				{domains[currentIndex]}
-			</a>
+			<div class="side-pedestal">
+				<div class="pedestal-top"></div>
+				<div class="pedestal-body"></div>
+				<div class="pedestal-base"></div>
+			</div>
+			
 			<div class="marble-pedestal">
+				<div class="pedestal-top"></div>
+				<div class="pedestal-body"></div>
+				<div class="pedestal-base"></div>
+			</div>
+			
+			<div class="side-pedestal">
 				<div class="pedestal-top"></div>
 				<div class="pedestal-body"></div>
 				<div class="pedestal-base"></div>
