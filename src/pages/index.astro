@@ -374,6 +374,13 @@ const rightDomains = domains.slice(currentIndex + 1);
 				position: relative;
 				transform: translateY(40px);
 				bottom: 50px;
+				cursor: pointer;
+				transition: transform 0.3s ease, opacity 0.3s ease;
+			}
+
+			.side-pedestal:hover {
+				transform: translateY(35px) scale(1.05); /* Slight lift and scale on hover */
+				opacity: 0.9;
 			}
 
 			.side-pedestal .pedestal-top {
@@ -615,19 +622,61 @@ const rightDomains = domains.slice(currentIndex + 1);
 					letter-spacing: 1px;
 				}
 			}
+
+			/* Add styles for side domain labels */
+			.side-domain-label {
+				position: absolute;
+				top: -45px;
+				left: 50%;
+				transform: translateX(-50%);
+				color: rgba(255, 255, 255, 0.7);
+				font-variant: small-caps;
+				letter-spacing: 1px;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+				white-space: nowrap;
+				font-size: clamp(0.8rem, 2vw, 0.9rem);
+				text-align: center;
+				pointer-events: none; /* Let clicks pass through to pedestal */
+			}
+
+			/* Responsive adjustments for side labels */
+			@media (max-width: 768px) {
+				.side-domain-label {
+					font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+					top: -35px;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.side-domain-label {
+					font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+					top: -30px;
+				}
+			}
+
+			/* Add click effect */
+			.side-pedestal:active {
+				transform: translateY(42px) scale(0.98);
+			}
 		</style>
 
 		<!-- Add fluting elements after the columns-container -->
 		<div class="border-fluting-top"></div>
 		<div class="border-fluting-bottom"></div>
 
-		<!-- Update the domain display HTML -->
+		<!-- Update the domain display HTML with navigation -->
 		<div class="domain-display">
-			<div class="side-pedestal">
+			<a href={currentIndex > 0 
+				? `http://${domains[currentIndex - 1]}` 
+				: `http://${domains[domains.length - 1]}`} 
+				class="side-pedestal">
+				<div class="side-domain-label">
+					{currentIndex > 0 ? domains[currentIndex - 1] : domains[domains.length - 1]}
+				</div>
 				<div class="pedestal-top"></div>
 				<div class="pedestal-body"></div>
 				<div class="pedestal-base"></div>
-			</div>
+			</a>
 			
 			<div class="marble-pedestal">
 				<div class="domain-label">{domains[currentIndex]}</div>
@@ -636,11 +685,17 @@ const rightDomains = domains.slice(currentIndex + 1);
 				<div class="pedestal-base"></div>
 			</div>
 			
-			<div class="side-pedestal">
+			<a href={currentIndex < domains.length - 1 
+				? `http://${domains[currentIndex + 1]}` 
+				: `http://${domains[0]}`} 
+				class="side-pedestal">
+				<div class="side-domain-label">
+					{currentIndex < domains.length - 1 ? domains[currentIndex + 1] : domains[0]}
+				</div>
 				<div class="pedestal-top"></div>
 				<div class="pedestal-body"></div>
 				<div class="pedestal-base"></div>
-			</div>
+			</a>
 		</div>
 	</body>
 </html>
