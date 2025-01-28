@@ -1,11 +1,469 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// Get the domains
+const domains = [
+	'example1.com',
+	'example2.com',
+	'example3.com',
+	'localhost'
+];
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Get current domain (without www.)
+const currentDomain = Astro.url.hostname.replace('www.', '');
+
+// Find the current domain index
+const currentIndex = domains.indexOf(currentDomain) !== -1 
+	? domains.indexOf(currentDomain) 
+	: 0;
+
+// Split domains into left, current, and right
+const leftDomains = domains.slice(0, currentIndex);
+const rightDomains = domains.slice(currentIndex + 1);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Ioannis's Domain Collection</title>
+	</head>
+	<body>
+		<div class="columns-container">
+			<div class="column left">
+				<div class="column-capital"></div>
+				<div class="column-shaft"></div>
+				<div class="column-base"></div>
+			</div>
+			<div class="column right">
+				<div class="column-capital"></div>
+				<div class="column-shaft"></div>
+				<div class="column-base"></div>
+			</div>
+		</div>
+
+		<div class="exhibition">
+			<header>
+				<h1>Ioannis's Domain Collection</h1>
+				<p class="description">Welcome to my curated collection of digital domains. Each domain represents a unique digital space, carefully selected and maintained. Click any domain to visit its respective space.</p>
+				<p class="lease-notice">
+					Interested in using one of these domains? While I maintain sentimental attachment to these domains, 
+					I'm open to leasing them at no cost. The only requirement is maintaining a backlink to this showcase. 
+					<a href="mailto:your@email.com" class="contact-link">Reach out to discuss</a>.
+				</p>
+			</header>
+
+			<div class="museum">
+				<!-- We'll add new showcase code here -->
+			</div>
+		</div>
+
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				min-height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: linear-gradient(135deg, #1e3d59, #2d5175); /* Deep Aegean blue */
+				font-family: 'Trajan Pro', 'Times New Roman', serif;
+				color: #fff;
+				position: relative;
+				overflow-x: hidden;
+			}
+
+			/* Remove body overlays */
+			body::before, body::after {
+				display: none;
+			}
+
+			/* Add back the body overlays but with white borders */
+			body::before, body::after {
+				content: '';
+				position: fixed;
+				left: 0;
+				right: 0;
+				height: 40px;
+				background: #fff;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+				z-index: 10;
+			}
+
+			body::before {
+				top: 0;
+				background: linear-gradient(to bottom,
+					#fff 0%,
+					#fff 60%,
+					#f5f5f5 100%
+				);
+			}
+
+			body::after {
+				bottom: 0;
+				background: linear-gradient(to top,
+					#fff 0%,
+					#fff 60%,
+					#f5f5f5 100%
+				);
+			}
+
+			/* Add decorative lines to match column fluting */
+			body::before {
+				border-bottom: 1px solid #f0f0f0;
+			}
+
+			body::after {
+				border-top: 1px solid #f0f0f0;
+			}
+
+			.exhibition {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 60px;
+				padding: 80px 120px;
+				width: 100%;
+				max-width: 1200px;
+				position: relative;
+				z-index: 1;
+			}
+
+			header {
+				text-align: center;
+				max-width: 800px;
+				position: relative;
+				padding: 40px;
+				border: 1px solid rgba(255, 215, 0, 0.2);
+				background: rgba(255, 255, 255, 0.03);
+			}
+
+			/* Greek column decorations */
+			header::before, header::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				width: 30px;
+				height: 100%;
+				background: linear-gradient(to bottom,
+					#ffd700 0%, #ffd700 10%,
+					transparent 10%, transparent 90%,
+					#ffd700 90%, #ffd700 100%
+				);
+				opacity: 0.2;
+			}
+
+			header::before {
+				left: 0;
+			}
+
+			header::after {
+				right: 0;
+			}
+
+			h1 {
+				font-size: 3rem;
+				margin: 0;
+				background: linear-gradient(45deg, #ffd700, #fff7cc); /* Gold gradient */
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+				font-variant: small-caps;
+				letter-spacing: 4px;
+			}
+
+			.description {
+				color: #fff;
+				line-height: 1.8;
+				margin: 30px 0;
+				font-size: 1.1rem;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+			}
+
+			.lease-notice {
+				color: #fff;
+				font-size: 1rem;
+				line-height: 1.8;
+				margin: 20px 0;
+				padding: 30px;
+				border: 2px solid rgba(255, 215, 0, 0.2);
+				background: rgba(30, 61, 89, 0.6);
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+				position: relative;
+			}
+
+			.lease-notice::before {
+				content: '';
+				position: absolute;
+				inset: 5px;
+				border: 1px solid rgba(255, 215, 0, 0.1);
+				pointer-events: none;
+			}
+
+			.contact-link {
+				color: #ffd700;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				font-weight: 500;
+				padding: 0 4px;
+				font-variant: small-caps;
+			}
+
+			.contact-link:hover {
+				color: #fff7cc;
+				text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+			}
+
+			.museum {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				min-height: 400px;
+				position: relative;
+			}
+
+			/* Remove museum decorations */
+			.museum::before, .museum::after {
+				display: none;
+			}
+
+			/* Update column container back to original */
+			.columns-container {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				pointer-events: none;
+				z-index: 2;
+			}
+
+			/* Restore original column capital */
+			.column-capital {
+				height: 80px;
+				background: #fff;
+				position: relative;
+				margin-bottom: -1px;
+				box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+			}
+
+			.column-capital::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -10px;
+				right: -10px;
+				height: 20px;
+				background: #fff;
+				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			}
+
+			.column-capital::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: -5px;
+				right: -5px;
+				height: 15px;
+				background: #fff;
+			}
+
+			/* Restore original column base */
+			.column-base {
+				height: 60px;
+				background: #fff;
+				position: relative;
+				margin-top: -1px;
+				box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+			}
+
+			.column-base::before {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: -10px;
+				right: -10px;
+				height: 20px;
+				background: #fff;
+				box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+			}
+
+			.column-base::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -5px;
+				right: -5px;
+				height: 15px;
+				background: #fff;
+			}
+
+			/* Column styles */
+			.column {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				width: 60px;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.column.left {
+				left: 40px;
+			}
+
+			.column.right {
+				right: 40px;
+			}
+
+			/* Column shaft */
+			.column-shaft {
+				flex-grow: 1;
+				background: #fff;
+				position: relative;
+				box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+			}
+
+			/* Simpler fluting effect */
+			.column-shaft::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: repeating-linear-gradient(90deg,
+					#fff 0px,
+					#fff 5px,
+					#f5f5f5 5px,
+					#f5f5f5 10px
+				);
+			}
+
+			/* Remove the marble texture overlay */
+			.column::before {
+				display: none;
+			}
+
+			/* Add fluting effect to borders */
+			.border-fluting-top, .border-fluting-bottom {
+				position: fixed;
+				left: 0;
+				right: 0;
+				height: 40px;
+				pointer-events: none;
+				z-index: 10;
+				background: repeating-linear-gradient(90deg,
+					#fff 0px,
+					#fff 5px,
+					#f5f5f5 5px,
+					#f5f5f5 10px
+				);
+			}
+
+			.border-fluting-top {
+				top: 0;
+			}
+
+			.border-fluting-bottom {
+				bottom: 0;
+			}
+
+			/* Add styles for the domain pedestal */
+			.domain-display {
+				position: fixed;
+				bottom: 40px; /* Align with bottom border */
+				left: 50%;
+				transform: translateX(-50%);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				z-index: 11; /* Above the border */
+			}
+
+			.domain-text {
+				background: linear-gradient(135deg, #1e3d59, #2d5175);
+				padding: 15px 30px;
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				color: #fff;
+				font-variant: small-caps;
+				letter-spacing: 1px;
+				text-decoration: none;
+				margin-bottom: 20px;
+			}
+
+			.marble-pedestal {
+				width: 240px;
+				height: 160px;
+				position: relative;
+				transform: translateY(40px);
+			}
+
+			.pedestal-top {
+				height: 30px;
+				background: #fff;
+				position: relative;
+				box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+			}
+
+			.pedestal-top::before {
+				content: '';
+				position: absolute;
+				top: -15px;
+				left: -15px;
+				right: -15px;
+				height: 15px;
+				background: #fff;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+
+			.pedestal-body {
+				height: 100px;
+				background: #fff;
+				margin: 0 30px;
+				box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+				background: repeating-linear-gradient(90deg,
+					#fff 0px,
+					#fff 5px,
+					#f5f5f5 5px,
+					#f5f5f5 10px
+				);
+			}
+
+			.pedestal-base {
+				height: 30px;
+				background: #fff;
+				position: relative;
+				box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.1);
+			}
+
+			.pedestal-base::after {
+				content: '';
+				position: absolute;
+				bottom: -15px;
+				left: -30px;
+				right: -30px;
+				height: 15px;
+				background: #fff;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+		</style>
+
+		<!-- Add fluting elements after the columns-container -->
+		<div class="border-fluting-top"></div>
+		<div class="border-fluting-bottom"></div>
+
+		<!-- Add the domain display after the museum div -->
+		<div class="domain-display">
+			<a href={`http://${domains[currentIndex]}`} class="domain-text">
+				{domains[currentIndex]}
+			</a>
+			<div class="marble-pedestal">
+				<div class="pedestal-top"></div>
+				<div class="pedestal-body"></div>
+				<div class="pedestal-base"></div>
+			</div>
+		</div>
+	</body>
+</html>
