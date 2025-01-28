@@ -409,7 +409,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				z-index: 12;
 				display: flex;
 				align-items: flex-end; /* Align bottoms of pedestals */
-				gap: 40px;
+				gap: 60px; /* Increased from 40px */
 			}
 
 			/* Style for side pedestals */
@@ -539,7 +539,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 			/* Update responsive styles for pedestals */
 			@media (max-width: 768px) {
 				.domain-display {
-					gap: clamp(20px, 4vw, 40px);
+					gap: 40px; /* Increased from 20px */
 				}
 
 				/* Adjust main pedestal */
@@ -577,7 +577,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 			/* Additional adjustments for very small screens */
 			@media (max-width: 480px) {
 				.domain-display {
-					gap: 10px; /* Even smaller gap */
+					gap: 20px; /* Increased from 10px */
 				}
 
 				.marble-pedestal {
@@ -621,6 +621,63 @@ const rightDomains = domains.slice(currentIndex + 1);
 
 				.lease-notice {
 					padding: clamp(12px, 2.5vw, 15px);
+				}
+			}
+
+			/* Update responsive styles for very small screens */
+			@media (max-width: 400px) {
+				.domain-display {
+					gap: 15px; /* Increased from 8px */
+					transform: scale(0.8) translateX(-60%);
+				}
+
+				.marble-pedestal {
+					width: 100px;
+					height: 80px;
+					bottom: 30px;
+				}
+
+				.side-pedestal {
+					width: 70px;
+					height: 60px;
+					bottom: 28px;
+				}
+
+				/* Adjust domain labels */
+				.domain-label {
+					top: -65px;
+					padding: 8px 16px;
+					font-size: clamp(0.9rem, 3vw, 1.1rem);
+				}
+
+				.side-domain-label {
+					top: -45px;
+					padding: 6px 12px;
+					font-size: clamp(0.8rem, 2vw, 0.9rem);
+				}
+
+				/* Adjust pedestal parts */
+				.side-pedestal .pedestal-top {
+					height: 10px;
+				}
+
+				.side-pedestal .pedestal-body {
+					height: 40px;
+					margin: 0 10px;
+				}
+
+				.side-pedestal .pedestal-base {
+					height: 10px;
+				}
+
+				/* Adjust fluting pattern */
+				.pedestal-body {
+					background: repeating-linear-gradient(90deg,
+						#fff 0px,
+						#fff 2px,
+						#f5f5f5 2px,
+						#f5f5f5 4px
+					);
 				}
 			}
 
@@ -703,7 +760,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				border-color: rgba(255, 255, 255, 0.25);
 			}
 
-			/* Add container for better text grouping */
+			/* Update text container styles for better mobile centering */
 			.text-container {
 				position: relative;
 				z-index: 20;
@@ -712,6 +769,36 @@ const rightDomains = domains.slice(currentIndex + 1);
 				gap: 20px;
 				width: 100%;
 				max-width: min(90%, 800px);
+				margin: 0 auto; /* Center the container */
+				padding: 0 15px; /* Add padding to prevent edge touching */
+			}
+
+			/* Ensure header content is centered */
+			header {
+				text-align: center;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			/* Update responsive adjustments */
+			@media (max-width: 768px) {
+				.text-container {
+					padding: 0 20px;
+					text-align: center;
+				}
+
+				h1, .description, .lease-notice {
+					margin-left: auto;
+					margin-right: auto;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.text-container {
+					padding: 0 15px;
+				}
 			}
 
 			/* Update z-index hierarchy */
