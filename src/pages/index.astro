@@ -17,7 +17,6 @@ const domains = [
 
 // Get current domain (without www.)
 const currentDomain = Astro.url.hostname.replace('www.', '');
-console.log(currentDomain);
 
 // Find the current domain index
 const currentIndex = domains.indexOf(currentDomain) !== -1 
