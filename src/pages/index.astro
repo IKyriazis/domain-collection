@@ -1,10 +1,17 @@
 ---
 // Get the domains
 const domains = [
-	'example1.com',
-	'example2.com',
-	'example3.com',
-	'localhost'
+	'francospizza1.com',
+	'hrisohorafa.com',
+	'hustler.house',
+	'seqr.chat',
+	'thesalonniki.com',
+	'scanch.at',
+	'beecretan.com',
+	'chrysochorafa.club',
+	'chrysochorafa.com',
+	'memeinthemail.com',
+	'olympusracing.com',
 ];
 
 // Get current domain (without www.)
@@ -44,13 +51,15 @@ const rightDomains = domains.slice(currentIndex + 1);
 
 		<div class="exhibition">
 			<header>
-				<h1>Ioannis's Domain Collection</h1>
-				<p class="description">Welcome to my curated collection of digital domains. Click on the left or right domains to cycle through my whole collection.</p>
-				<p class="lease-notice">
-					Interested in using one of these domains? While I maintain sentimental attachment to these domains, 
-					I'm open to leasing them. 
-					<a href="mailto:yiannisgr1@gmail.com" class="contact-link">Reach out to discuss</a>.
-				</p>
+				<div class="text-container">
+					<h1>Ioannis's Domain Collection</h1>
+					<p class="description">Welcome to my curated collection of digital domains. Click on the left or right domains to cycle through my whole collection.</p>
+					<p class="lease-notice">
+						Interested in using one of these domains? While I maintain sentimental attachment to these domains, 
+						I'm open to leasing them. 
+						<a href="mailto:yiannisgr1@gmail.com" class="contact-link">Reach out to discuss</a>.
+					</p>
+				</div>
 			</header>
 
 			<div class="museum">
@@ -141,6 +150,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				position: relative;
 				padding: clamp(20px, 4vw, 30px);
 				border: none;
+				z-index: 20; /* Higher than pedestals */
 			}
 
 			/* Remove background from header */
@@ -157,6 +167,16 @@ const rightDomains = domains.slice(currentIndex + 1);
 				letter-spacing: clamp(2px, 0.5vw, 4px);
 				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 				line-height: 1.2;
+				position: relative;
+				z-index: 20;
+				background: linear-gradient(
+					to bottom,
+					rgba(30, 61, 89, 0.8),
+					rgba(45, 81, 117, 0.8)
+				);
+				padding: 15px 30px;
+				border-radius: 4px;
+				backdrop-filter: blur(4px);
 			}
 
 			.description {
@@ -166,6 +186,16 @@ const rightDomains = domains.slice(currentIndex + 1);
 				font-size: clamp(0.9rem, 2.5vw, 1.1rem);
 				max-width: min(90%, 600px);
 				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+				position: relative;
+				z-index: 20;
+				background: linear-gradient(
+					to bottom,
+					rgba(30, 61, 89, 0.7),
+					rgba(45, 81, 117, 0.7)
+				);
+				padding: 15px 30px;
+				border-radius: 4px;
+				backdrop-filter: blur(4px);
 			}
 
 			/* Update lease notice */
@@ -176,6 +206,15 @@ const rightDomains = domains.slice(currentIndex + 1);
 				margin: 20px auto;
 				padding: clamp(15px, 3vw, 20px);
 				max-width: min(90%, 700px);
+				position: relative;
+				z-index: 20; /* Higher than pedestals */
+				background: linear-gradient(
+					to bottom,
+					rgba(30, 61, 89, 0.8),
+					rgba(45, 81, 117, 0.8)
+				);
+				backdrop-filter: blur(4px);
+				border-radius: 4px;
 			}
 
 			/* Remove lease notice decorative elements */
@@ -191,6 +230,8 @@ const rightDomains = domains.slice(currentIndex + 1);
 				padding: 0 4px;
 				font-variant: small-caps;
 				font-size: inherit;
+				position: relative;
+				z-index: 21; /* Higher than lease notice */
 			}
 
 			.contact-link:hover {
@@ -376,11 +417,11 @@ const rightDomains = domains.slice(currentIndex + 1);
 				bottom: 50px;
 				cursor: pointer;
 				transition: transform 0.3s ease, opacity 0.3s ease;
+				z-index: 15; /* Higher than center pedestal */
 			}
 
 			.side-pedestal:hover {
-				transform: translateY(35px) scale(1.05); /* Slight lift and scale on hover */
-				opacity: 0.9;
+				transform: translateY(35px) scale(1.08); /* Slightly larger scale */
 			}
 
 			.side-pedestal .pedestal-top {
@@ -436,6 +477,7 @@ const rightDomains = domains.slice(currentIndex + 1);
 				position: relative;
 				transform: translateY(40px);
 				border: none;
+				z-index: 13;
 			}
 
 			.pedestal-top {
@@ -578,85 +620,138 @@ const rightDomains = domains.slice(currentIndex + 1);
 				}
 			}
 
-			/* Update domain label styles */
+			/* Update domain label styles for better readability */
 			.domain-label {
 				position: absolute;
-				top: -75px; /* Move higher above pedestal */
+				top: -75px;
 				left: 50%;
 				transform: translateX(-50%);
 				color: #fff;
 				font-variant: small-caps;
 				letter-spacing: 2px;
 				text-shadow: 
-					0 2px 4px rgba(0, 0, 0, 0.3),
-					0 0 20px rgba(255, 255, 255, 0.2); /* Subtle glow */
+					0 2px 4px rgba(0, 0, 0, 0.4),
+					0 0 30px rgba(255, 255, 255, 0.3); /* Enhanced glow */
 				white-space: nowrap;
-				font-size: clamp(1.1rem, 3vw, 1.4rem); /* Larger font */
+				font-size: clamp(1.2rem, 3.5vw, 1.6rem); /* Larger font */
 				text-align: center;
-				font-weight: 500;
+				font-weight: 600; /* Bolder */
+				padding: 12px 25px;
+				background: linear-gradient(
+					to bottom,
+					rgba(30, 61, 89, 0.9),
+					rgba(45, 81, 117, 0.9)
+				);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				border-radius: 6px;
+				backdrop-filter: blur(8px);
+			}
+
+			/* Update side domain label styles */
+			.side-domain-label {
+				position: absolute;
+				top: -55px;
+				left: 50%;
+				transform: translateX(-50%);
+				color: rgba(255, 255, 255, 0.85); /* More visible */
+				font-variant: small-caps;
+				letter-spacing: 1.5px;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+				white-space: nowrap;
+				font-size: clamp(0.9rem, 2.2vw, 1.1rem); /* Slightly larger */
+				text-align: center;
 				padding: 10px 20px;
 				background: linear-gradient(
 					to bottom,
-					rgba(255, 255, 255, 0.1),
-					rgba(255, 255, 255, 0.05)
+					rgba(30, 61, 89, 0.8),
+					rgba(45, 81, 117, 0.8)
 				);
-				border: 1px solid rgba(255, 255, 255, 0.1);
+				border: 1px solid rgba(255, 255, 255, 0.15);
 				border-radius: 4px;
-				backdrop-filter: blur(4px);
+				backdrop-filter: blur(6px);
+				font-weight: 500;
+				z-index: 16;
+				color: rgba(255, 255, 255, 0.95); /* Brighter text */
+				background: linear-gradient(
+					to bottom,
+					rgba(30, 61, 89, 0.95),
+					rgba(45, 81, 117, 0.95)
+				);
+				border: 1px solid rgba(255, 255, 255, 0.25);
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 			}
 
-			/* Responsive adjustments */
-			@media (max-width: 768px) {
-				.domain-label {
-					font-size: clamp(1rem, 2.5vw, 1.1rem);
-					top: -45px;
-					padding: 8px 16px;
-				}
+			/* Enhance hover effects */
+			.domain-label:hover {
+				transform: translateX(-50%) translateY(-2px);
+				box-shadow: 
+					0 5px 15px rgba(0, 0, 0, 0.3),
+					0 0 30px rgba(255, 255, 255, 0.1);
+				border-color: rgba(255, 255, 255, 0.3);
 			}
 
-			@media (max-width: 480px) {
-				.domain-label {
-					font-size: clamp(0.9rem, 2vw, 1rem);
-					top: -40px;
-					padding: 6px 12px;
-					letter-spacing: 1px;
-				}
+			.side-domain-label:hover {
+				color: rgba(255, 255, 255, 0.95);
+				transform: translateX(-50%) translateY(-2px);
+				box-shadow: 
+					0 3px 10px rgba(0, 0, 0, 0.3),
+					0 0 20px rgba(255, 255, 255, 0.1);
+				border-color: rgba(255, 255, 255, 0.25);
 			}
 
-			/* Add styles for side domain labels */
-			.side-domain-label {
-				position: absolute;
-				top: -45px;
-				left: 50%;
-				transform: translateX(-50%);
-				color: rgba(255, 255, 255, 0.7);
-				font-variant: small-caps;
-				letter-spacing: 1px;
-				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-				white-space: nowrap;
-				font-size: clamp(0.8rem, 2vw, 0.9rem);
-				text-align: center;
-				pointer-events: none; /* Let clicks pass through to pedestal */
+			/* Add container for better text grouping */
+			.text-container {
+				position: relative;
+				z-index: 20;
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+				width: 100%;
+				max-width: min(90%, 800px);
 			}
 
-			/* Responsive adjustments for side labels */
-			@media (max-width: 768px) {
-				.side-domain-label {
-					font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-					top: -35px;
-				}
+			/* Update z-index hierarchy */
+			.domain-display {
+				z-index: 12;
 			}
 
-			@media (max-width: 480px) {
-				.side-domain-label {
-					font-size: clamp(0.6rem, 1.5vw, 0.7rem);
-					top: -30px;
-				}
+			/* Side pedestals styles */
+			.side-pedestal {
+				z-index: 15; /* Higher than center pedestal */
 			}
 
-			/* Add click effect */
-			.side-pedestal:active {
-				transform: translateY(42px) scale(0.98);
+			.side-pedestal .side-domain-label {
+				z-index: 16;
+				color: rgba(255, 255, 255, 0.95); /* Brighter text */
+				background: linear-gradient(
+					to bottom,
+					rgba(30, 61, 89, 0.95),
+					rgba(45, 81, 117, 0.95)
+				);
+				border: 1px solid rgba(255, 255, 255, 0.25);
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+			}
+
+			/* Center pedestal */
+			.marble-pedestal {
+				z-index: 13;
+			}
+
+			/* Enhance hover effects for side pedestals */
+			.side-pedestal:hover {
+				transform: translateY(35px) scale(1.08); /* Slightly larger scale */
+			}
+
+			.side-pedestal .side-domain-label:hover {
+				box-shadow: 
+					0 4px 12px rgba(0, 0, 0, 0.4),
+					0 0 25px rgba(255, 255, 255, 0.15);
+			}
+
+			/* Remove specific first/last child styles */
+			.side-pedestal:first-child,
+			.side-pedestal:last-child {
+				z-index: 15;
 			}
 		</style>
 
@@ -679,7 +774,9 @@ const rightDomains = domains.slice(currentIndex + 1);
 			</a>
 			
 			<div class="marble-pedestal">
-				<div class="domain-label">{domains[currentIndex]}</div>
+				<a href={`http://${domains[currentIndex]}`} class="domain-label">
+					{domains[currentIndex]}
+				</a>
 				<div class="pedestal-top"></div>
 				<div class="pedestal-body"></div>
 				<div class="pedestal-base"></div>
